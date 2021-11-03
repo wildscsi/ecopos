@@ -1,0 +1,182 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+
+<AsettingScreen>:
+    canvas:
+        Color:
+            rgba: app.bcolor3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    # контейнер с кнопкой возврата к общим настройкам
+    RelativeLayout:
+        size_hint: [1, 0.07]
+        pos_hint: {'center_x': 0.5, 'center_y': .965}
+
+        RelativeLayout:
+            id: cntnavy
+            size_hint: [1, 0.8]
+            pos_hint: {'center_x': 0.5, 'center_y': .5}
+            padding: 2
+            canvas:
+                Color:
+                    rgb: app.bcolor2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDIconButton:
+                cid: 'leftgroup'
+                icon: "arrow-left-thick"
+                pos_hint: {"center_x": .04, "center_y": .65}
+                on_press: root.parent.current = "SETTINGS"
+
+        Label_:
+            text: app.translation._('Настройки приложения')
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color : app.color_white
+            pos_hint: {"center_x": .63, 'center_y': .6}
+            bold: True
+            text_size: self.width , None
+
+            height: self.texture_size[1]
+
+
+
+    ScrollView:
+        size_hint: [1, 1]
+        pos_hint: {'center_x': 0.5, 'center_y': .46}
+
+        MDList:
+            id: asetting_list
+
+
+            # Название предприятия
+            OneLineIconListItem:
+                id: listlfirm
+                text: app.translation._('Название организации')
+                font_style: "H7"
+                on_release: root.show_firm_dialog()
+                IconLeftWidget:
+                    icon: "home-outline"
+                MDLabel:
+                    id: lfirm
+                    text: app.firm
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            # Адрес предприятия
+            OneLineIconListItem:
+                id: listaddressfirm
+                text: app.translation._('Адрес организации')
+                font_style: "H7"
+                on_release: root.show_addressfirm_dialog()
+                IconLeftWidget:
+                    icon: "map-marker-outline"
+                MDLabel:
+                    id: laddressfirm
+                    text: app.addressfirm
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            # УНН
+            OneLineIconListItem:
+                id: listinn
+                text: app.translation._('ИНН')
+                font_style: "H7"
+                on_release: root.show_inn_dialog()
+                IconLeftWidget:
+                    icon: "scatter-plot-outline"
+                MDLabel:
+                    id: linn
+                    text: app.inn
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+
+            # Валюта
+            OneLineIconListItem:
+                text: app.translation._('Выбор валюты')
+                font_style: "H7"
+                on_release: root.show_val_dialog()
+                IconLeftWidget:
+                    icon: "currency-eur"
+                MDLabel:
+                    id: cval
+                    text: app.cval
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            # округление
+            OneLineIconListItem:
+                text: app.translation._("Округление")
+                font_style: "H7"
+                on_release: root.show_iround_dialog()
+                IconLeftWidget:
+                    icon: "music-note-whole-dotted"
+                MDLabel:
+                    id: iround
+                    text: str(app.iround)
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+
+            # общая скидка
+            OneLineIconListItem:
+                text: app.translation._("Общая скидка")
+                font_style: "H7"
+                IconLeftWidget:
+                    icon: "sale"
+                MDSlider:
+                    id: sldiscount
+                    min: 0
+                    max: 99
+                    value: str(app.alldsc)
+                    size_hint: [0.3, 0.5]
+                    pos_hint: {'center_x': 0.75, 'center_y': .5}
+                    on_active: root.alldscch(self)
+                MDLabel:
+                    id: alldsc
+                    text: str(app.alldsc) + ' %'
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .95, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+# выбор валюты
+<ValConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: valcheck
+        group: "check"
+
+

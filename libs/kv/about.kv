@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+#
+# LICENSE: Commercial
+#: import StiffScrollEffect kivymd.effects.stiffscroll.StiffScrollEffect
+
+<AboutScreen>:
+    canvas:
+        Color:
+            rgba: app.bcolor3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        ScrollView:
+            effect_cls: StiffScrollEffect
+
+            MDList:
+                TwoLineListItem:
+                    text: "Version:"
+                    secondary_text: "1.01"
+
+                TwoLineListItem:
+                    text: "License:"
+                    secondary_text: "CPV.BY"
+
+                OneLineListItem:
+                    text: "Serhio & Yra Bos"
+
+                OneLineListItem:
+                    text: "http://www.cpv.by"
+
+

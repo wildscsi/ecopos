@@ -1,0 +1,542 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+#
+# LICENSE: Commercial
+
+
+<Kassa>:
+    #on_pre_enter: root.loaddrid()
+    name: 'kassa'
+    # общий контейнер
+    # Линия прогресса
+
+    #canvas:
+    #    Color:
+    #        rgb: app.color_hdarkblue
+    #    Rectangle:
+    #        size: self.size
+
+    ProgressBar:
+        id: progress
+        size_hint: 1, 0.05
+        pos_hint: {"center_x": .5, "center_y": 0.998}
+        max: 100
+        value: 0
+
+
+    # левый контейнер группами-блюдом
+    # -----------------------------------------------------------------------------------------------------------
+    BoxLayout:
+        id: cntl
+        orientation: 'vertical'
+        size_hint: 0.6, 1
+        pos_hint: {"center_x": .3, "center_y": 0.499}
+        padding: 0
+        canvas:
+            Color:
+                rgb: app.color_darkblue
+            Rectangle:
+                size: self.size
+
+        # контейнер с навигацией по блюдам
+        RelativeLayout:
+            id: cntnavigroup
+            size_hint: [1, 0.07]
+            pos_hint: {'center_x': 0.5, 'center_y': .9}
+
+            RelativeLayout:
+                id: cntnavigroup
+                size_hint: [0.99, 0.8]
+                pos_hint: {'center_x': 0.5, 'center_y': .5}
+                padding: 2
+
+                IconTextButton_:
+                    cid: 'leftgroup'
+                    text: ""
+                    pos_hint: {"center_x": .05, 'center_y': .5}
+                    size_hint: [0.09, 0.8]
+                    icon: "arrow-left-bold"
+                    md_bg_color: app.color_blue
+                    text_color: app.color_white
+                    on_press: root.buttonclick(self)
+
+                MDRectangleFlatIconButton:
+                    cid: 'homegroup'
+                    text: ""
+                    pos_hint: {"center_x": .15, 'center_y': .5}
+                    size_hint: [0.09, 0.8]
+                    icon: "home"
+                    md_bg_color: app.color_blue
+                    text_color: app.color_white
+                    on_press: root.buttonclick(self)
+
+                MDRectangleFlatIconButton:
+                    cid: 'rightgroup'
+                    text: ""
+                    pos_hint: {"center_x": .25, 'center_y': .5}
+                    size_hint: [0.09, 0.8]
+                    icon: "arrow-right-bold"
+                    md_bg_color: app.color_blue
+                    text_color: app.color_white
+                    on_press: root.buttonclick(self)
+                Label_:
+                    id: lpath
+                    text: ''
+                    pos_hint: {"center_x": .63, 'center_y': .5}
+                    size_hint: [0.65, 0.6]
+                    halign: 'left'
+                    theme_text_color: 'Custom'
+                    text_color : app.color_white
+                    bold : True
+
+
+        # контейнер с группами и товарами
+        RelativeLayout:
+            id: cntgruppa
+            size_hint: [1, 0.9]
+            pos_hint: {'center_x': 0.5, 'center_y': 1}
+            padding: 0
+            ScrollView:
+                # общий контейнер
+                GridLayout:
+                    id: box_gruppa
+                    size_hint_y: None
+                    cols: 1
+                    rows: 2
+                    spacing: 6
+                    padding: 0
+                    height: self.minimum_height
+
+
+    # правый контейнер c чеком и расчётом
+    # -----------------------------------------------------------------------------------------------------------
+    RelativeLayout:
+        id: cntr
+        orientation: 'vertical'
+        size_hint: 0.4, 1.01
+        pos_hint: {"center_x": .8, "center_y": 0.5}
+        padding: 0
+
+
+        # контейнер с информацией
+        RelativeLayout:
+            id: cntnavigroup
+            size_hint: [1, 0.08]
+            pos_hint: {'center_x': 0.5, 'center_y': .96}
+            canvas:
+                Color:
+                    rgb: app.color_darkblue
+                Rectangle:
+                    size: self.size
+
+        # контейнер с шапкой чека
+        RelativeLayout:
+            id: cntshapka
+            size_hint: [1, 0.03]
+
+            pos_hint: {'center_x': 0.5, 'center_y': .907}
+            canvas:
+                Color:
+                    rgb: app.color_white
+                Rectangle:
+                    size: self.size
+                Color:
+                    rgba: app.color_black
+                Line:
+                    width: 1.
+                    points: (self.width/80, self.height/15, self.width/3, self.height/15)
+                Line:
+                    width: 1.
+                    points: (self.width/2.3, self.height/15, self.width/1.7, self.height/15)
+                Line:
+                    width: 1.
+                    points: (self.width/1.6, self.height/15, self.width/1.32, self.height/15)
+                Line:
+                    width: 1.
+                    points: (self.width/1.26, self.height/15, self.width/1.07, self.height/15)
+            MDLabel:
+                text:
+                    app.translation._('     Товар                                 Кол-во         Цена        Сумма')
+                pos_hint: {"center_x": 0.5, 'center_y': .5}
+                font_size: '11sp'
+                color : app.color_black
+                #bold: True
+
+
+
+        # строки чека -------------------------------------------------------------------------------------------------
+        MDBanner:
+            id: banner
+            type: "one-line"
+            size_hint_y: None
+            text: ["One line string text example without actions."]
+            #left_action: ["CANCEL", lambda x: None]
+            right_action: ["CLOSE", lambda x: self.hide()]
+
+            add_actions_buttons: ["CLOSE1", lambda x: self.hide()]
+            over_widget: scroll
+            vertical_pad: cntticket.height/6
+
+
+        RelativeLayout:
+            id: cntticket
+            size_hint: [1, 0.49]
+            pos_hint: {'center_x': 0.5, 'center_y': .64}
+            canvas:
+                #Color:
+                #    rgb: app.color_red
+                #Rectangle:
+                #    size: self.size
+
+
+
+            ScrollView:
+                # общий контейнер
+                id: scroll
+                GridLayout:
+                    id: box_ticket
+                    size_hint_y: None
+                    cols: 1
+                    rows: 0
+                    spacing: 0
+                    padding: 0
+                    height: self.minimum_height
+
+
+
+
+        # суммы оплаты ------------------------------------------------------------------------------------------------
+        RelativeLayout:
+            id: cntsumma
+            size_hint: [1, 0.18]
+            pos_hint: {'center_x': 0.5, 'center_y': .31}
+            canvas:
+                Color:
+                    rgb: app.color_white
+                Rectangle:
+                    size: self.size
+                Color:
+                    rgb: app.color_gray
+                # разделительная линия
+                Line:
+                    width: 1.
+                    points: (self.width/2, (95*self.height)/100, self.width/2, (10*self.height)/100)
+
+            MDLabel:
+                id: lkol
+                text:
+                    app.translation._('позиций')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.25, 'center_y': .75}
+                halign:'left'
+                font_style: 'Overline'
+
+            MDLabel:
+                id: ldscclient
+                text:
+                    app.translation._('дисконт клиента')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.25, 'center_y': .5}
+                halign:'left'
+                font_style: 'Overline'
+
+            MDLabel:
+                id: ldscmain
+                text:
+                    app.translation._('общий дисконт')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.25, 'center_y': .25}
+                halign:'left'
+                font_style: 'Overline'
+
+            MDLabel:
+                id: litog
+                text:
+                    app.translation._('итого')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.75, 'center_y': .75}
+                halign:'left'
+                font_style: 'Overline'
+            MDLabel:
+                id: ldscclient
+                text:
+                    app.translation._('скидка клиента')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.75, 'center_y': .5}
+                halign:'left'
+                font_style: 'Overline'
+            MDLabel:
+                id: ldscmain
+                text:
+                    app.translation._('скидка общая')
+                size_hint: [0.48, 0.15]
+                pos_hint: {'center_x': 0.75, 'center_y': .25}
+                halign:'left'
+                font_style: 'Overline'
+
+
+
+            MDLabel:
+                id: ekol
+                text:
+                    app.translation._('0')
+                size_hint: [0.2, 0.2]
+                pos_hint: {'center_x': 0.38, 'center_y': .80}
+                halign: 'right'
+                font_style: 'H6'
+
+            MDLabel:
+                id: edscclient
+                text:
+                    app.translation._('%0')
+                size_hint: [0.2, 0.2]
+                pos_hint: {'center_x': 0.38, 'center_y': .52}
+                halign: 'right'
+                font_style: 'Caption'
+
+            MDSwitch:
+                id: dscswitch
+                size_hint: [0.12, 0.1]
+                pos_hint: {'center_x': 0.38, 'center_y': .25}
+
+
+            MDLabel:
+                id: esall
+                text:
+                    app.translation._('$150')
+                size_hint: [0.3, 0.2]
+                pos_hint: {'center_x': 0.84, 'center_y': .82}
+                halign: 'right'
+                font_style: 'H5'
+
+            MDLabel:
+                id: edsc1
+                text:
+                    app.translation._('$10')
+                size_hint: [0.2, 0.2]
+                pos_hint: {'center_x': 0.88, 'center_y': .52}
+                halign: 'right'
+                font_style: 'Caption'
+
+            MDLabel:
+                id: edsc2
+                text:
+                    app.translation._('$5')
+                size_hint: [0.2, 0.2]
+                pos_hint: {'center_x': 0.88, 'center_y': .27}
+                halign: 'right'
+                font_style: 'Caption'
+
+        # управляющие символы -----------------------------------------------------------------------------------------
+        RelativeLayout:
+            id: cntbutton
+            size_hint: [1, 0.12]
+            pos_hint: {'center_x': 0.5, 'center_y': .17}
+            canvas:
+                Color:
+                    rgb: app.color_white
+                Rectangle:
+                    size: self.size
+
+            ScrollView:
+                do_scroll_x: True
+                do_scroll_y: True
+                cols:1
+                GridLayout:
+                    id: box_horizont
+                    rows: 1
+                    padding: [3, 3]
+                    size: self.minimum_size
+                    size_hint: None, None
+                    effect_cls: "ScrollEffect"
+                    #height: Window.height/4.5
+                    spacing: 5
+                    padding: 5
+
+                    MDRectangleFlatIconButton:
+                        cid: 'action_search'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('поиск')
+                        icon: "magnify"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+
+                    MDRectangleFlatIconButton:
+                        cid: 'action_save'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('сохр.')
+                        icon: "content-save"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+
+                    MDRectangleFlatIconButton:
+                        cid: 'action_print'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('печать')
+                        icon: "printer"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+                    MDRectangleFlatIconButton:
+                        cid: 'action_client'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('клиент')
+                        icon: "account-search-outline"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+                    MDRectangleFlatIconButton:
+                        cid: 'action_deliv'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('достав')
+                        icon: "car"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+                    MDRectangleFlatIconButton:
+                        cid: 'action_note'
+                        orientation: 'vertical'
+                        spacing: 0
+                        text:
+                            app.translation._('прим')
+                        icon: "note-plus-outline"
+                        size:[box_horizont.parent.size[0]/4.5, box_horizont.parent.size[1]*0.85]
+                        set_pos_labels: [0.1,0.2]
+                        md_bg_color: app.color_sgray
+                        text_color: app.color_black
+                        on_press: root.buttonclick(self)
+
+
+
+        # кнопки оплаты -----------------------------------------------------------------------------------------------
+        RelativeLayout:
+            id: cntbutpay
+            size_hint: [1, 0.11]
+            pos_hint: {'center_x': 0.5, 'center_y': 0.06}
+            canvas:
+                Color:
+                    rgb: app.color_white
+                Rectangle:
+                    size: self.size
+            MDRectangleFlatIconButton:
+                cid: 'ticketdel'
+                text:
+                    app.translation._('УД')
+                pos_hint: {"center_x": .15, 'center_y': .5}
+                size_hint: [0.24, 0.8]
+                icon: "delete"
+                md_bg_color: app.color_hdarkblue
+                text_color: app.color_red
+                on_press: root.show_alert_dialog()
+                #on_press: root.buttonclick(self)
+            MDRectangleFlatIconButton:
+                cid: 'ticketprepay'
+                text:
+                    app.translation._('СЧЁТ')
+                pos_hint: {"center_x": .465, 'center_y': .5}
+                size_hint: [0.31, 0.8]
+                icon: "book-outline"
+                md_bg_color: app.color_hdarkblue
+                text_color: app.color_white
+                on_press: root.buttonclick(self)
+                bold: True
+
+            MDRectangleFlatIconButton:
+                cid: 'ticketpay'
+                text:
+                    app.translation._('ЧЕК')
+                pos_hint: {"center_x": .815, 'center_y': .5}
+                size_hint: [0.31, 0.8]
+                icon: "book"
+                md_bg_color: app.color_hdarkblue
+                text_color: app.color_white
+                on_press: root.buttonclick(self)
+                text_bold: True
+
+
+<ItemForCustomBottomSheet@OneLineIconListItem>
+    on_press: app.custom_sheet.dismiss()
+    icon: ""
+
+    IconLeftWidget:
+        icon: root.icon
+
+<ContentCustomSheet@RelativeLayout>:
+    orientation: "vertical"
+    #size_hint_y: None
+    height: self.minimum_height
+    #pos_hint: {"top": 0.5}
+    #size_hint_y: None
+    height: "700dp"
+    pos_hint: {"center_x": .5, 'center_y': .5}
+    size_hint: [0.2, 0.2]
+
+
+    RelativeLayout:
+        pos_hint: {"center_x": .2, 'center_y': .5}
+        size_hint: [0.2, 0.2]
+
+        IconTextButton_:
+            cid: 'number'
+            text: "1"
+            icon: "one"
+            md_bg_color: app.color_blue
+            text_color: app.color_white
+            on_press: root.buttonclick(self)
+        IconTextButton_:
+            cid: 'number'
+            icon: "one"
+            text: "2"
+            md_bg_color: app.color_blue
+            text_color: app.color_white
+            on_press: root.buttonclick(self)
+
+
+<Content>:
+    orientation: "vertical"
+    padding: dp(10)
+    spacing: dp(10)
+    size_hint_y: None
+    height: self.minimum_height
+
+    TwoLineIconListItem:
+        text: "(050)-123-45-67"
+        secondary_text:
+            "hello"
+
+        IconLeftWidget:
+            icon: "phone"
+
+    TwoLineIconListItem:
+        text: "kivydevelopment@gmail.com"
+        secondary_text:
+            "hellooo"
+
+        IconLeftWidget:
+            icon: "email"

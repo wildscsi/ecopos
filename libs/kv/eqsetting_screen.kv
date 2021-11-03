@@ -1,0 +1,143 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+
+<EqsettingScreen>:
+    canvas:
+        Color:
+            rgba: app.bcolor3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    # контейнер с кнопкой возврата к общим настройкам
+    RelativeLayout:
+        size_hint: [1, 0.07]
+        pos_hint: {'center_x': 0.5, 'center_y': .965}
+
+        RelativeLayout:
+            id: cntnavy
+            size_hint: [1, 0.8]
+            pos_hint: {'center_x': 0.5, 'center_y': .5}
+            padding: 2
+            canvas:
+                Color:
+                    rgb: app.bcolor2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDIconButton:
+                cid: 'leftgroup'
+                icon: "arrow-left-thick"
+                pos_hint: {"center_x": .04, "center_y": .65}
+                on_press: root.parent.current = "SETTINGS"
+
+        Label_:
+            text: app.translation._('Настройки оборудования')
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color : app.color_white
+            pos_hint: {"center_x": .63, 'center_y': .6}
+            bold: True
+            text_size: self.width , None
+
+            height: self.texture_size[1]
+
+
+    ScrollView:
+        id: eqscroll
+        size_hint: [1, 1]
+        pos_hint: {'center_x': 0.5, 'center_y': .46}
+
+        MDList:
+            id: asetting_list
+            # ------------------------  ФР, касса, принтер -------------------
+            OneLineIconListItem:
+                id: fr
+                font_style: "H7"
+                on_release: root.open_frsetting(self)
+                text: app.translation._('Кассовый аппарат ')
+                IconLeftWidget:
+                    icon: "printer-check"
+
+
+            # Принтер счетов
+            OneLineIconListItem:
+                text: app.translation._("Принтер счетов")
+                font_style: "H7"
+                #on_release: root.show_iround_dialog()
+                IconLeftWidget:
+                    icon: "printer"
+                MDLabel:
+                    id: printer
+                    text: 'SENOR GTP-290'
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+
+            # VFD экран покупателя
+            OneLineIconListItem:
+                text: app.translation._("VFD дисплей")
+                font_style: "H7"
+                #on_release: root.show_iround_dialog()
+                IconLeftWidget:
+                    icon: "television"
+                MDLabel:
+                    id: vfd
+                    text: 'Firich'
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+            # BARCODE сканер
+            OneLineIconListItem:
+                text: app.translation._("Сканер штрихкодов")
+                font_style: "H7"
+                #on_release: root.show_iround_dialog()
+                IconLeftWidget:
+                    icon: "barcode-scan"
+                MDLabel:
+                    id: scaner
+                    text: 'Voyager'
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+
+            # BARCODE принтер
+            OneLineIconListItem:
+                text: app.translation._("Принтер штрихкодов")
+                font_style: "H7"
+                #on_release: root.show_iround_dialog()
+                IconLeftWidget:
+                    icon: "barcode"
+                MDLabel:
+                    id: barcodeprinter
+                    text: 'Zebra GTK-420t'
+                    color: app.color_white
+                    font_style: 'H2'
+                    halign: 'center'
+                    pos_hint: {"center_x": .8, "center_y": .5}
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+
+# иконка выбора типов оплат
+<ItemMultyConfirm>
+    on_release: root.set_icon(check)
+    CheckboxLeftWidget:
+        id: check

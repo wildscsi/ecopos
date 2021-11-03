@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+#
+# LICENSE: Commercial
+
+<About>:
+    name: 'about'
+
+    FloatLayout:
+
+        Image:
+            source: 'icon.png'
+            opacity: .4
+
+        BoxLayout:
+            id: box
+            orientation: 'vertical'
+            padding: dp(0), dp(10)
+
+            Widget:
+            Widget:
+
+            MDLabel:
+                id: label
+                font_size: '14sp'
+                bold: True
+                color: 0, 0, 0, 1
+                markup: True
+                halign: 'center'
+                on_ref_press: root.open_url(*args)
+
+            Widget:
+            Widget:

@@ -1,0 +1,13 @@
+/data.bin
+/data.log
+/localdb.db
+/temp
+/RECO/*.*
+__pycache__ 
+libs/applibs/__pycache__/*.*
+libs/base/__pycache__/*.*
+libs/baseclass/__pycache__/*.*
+/ptest
+libs_
+/.idea/
+/ecopos.ini

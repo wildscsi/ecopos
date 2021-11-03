@@ -1,0 +1,475 @@
+# Copyright (C) 2017 Ivanov Yuri aka HeaTTheatR
+# This file is distributed under the same license as the Kivy package.
+# Ivanov Yuri aka HeaTTheatR <gorodage@gmail.com>, 2017
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-03 22:23+0300\n"
+"PO-Revision-Date: 2017-01-11 15:36+0200\n"
+"Last-Translator: Ivanov Yuri aka HeaTTheatR <gorodage@gmail.com>\n"
+"Language-Team: Ivanov Yuri aka HeaTTheatR <gorodage@gmail.com>\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:120
+msgid "не используется"
+msgstr "no utilizado"
+
+#: libs/baseclass/settings_screen.py:51 libs/kv/settings_screen.kv:45
+msgid "Выбор языка"
+msgstr "Selección de idioma"
+
+#: libs/baseclass/settings_screen.py:56 libs/baseclass/kassa_screen.py:443
+#: libs/baseclass/kassa_screen.py:568 libs/baseclass/asetting_screen.py:186
+#: libs/baseclass/asetting_screen.py:234 libs/baseclass/buttonlib.py:511
+#: libs/baseclass/eqsetting_screen.py:128
+#: libs/baseclass/eqsetting_screen.py:175 libs/applibs/eq.py:341
+#: libs/applibs/eq.py:415 libs/applibs/eq.py:443 libs/applibs/eq.py:466
+#: libs/applibs/eq.py:486 libs/applibs/eq.py:507 libs/applibs/eq.py:530
+msgid "ОТМЕНА"
+msgstr "Cancel"
+
+#: libs/baseclass/settings_screen.py:57 libs/baseclass/kassa_screen.py:444
+#: libs/baseclass/kassa_screen.py:569 libs/baseclass/asetting_screen.py:187
+#: libs/baseclass/asetting_screen.py:235 libs/baseclass/eqsetting_screen.py:129
+#: libs/baseclass/eqsetting_screen.py:176 libs/applibs/eq.py:342
+#: libs/applibs/eq.py:416 libs/applibs/eq.py:444 libs/applibs/eq.py:467
+#: libs/applibs/eq.py:487 libs/applibs/eq.py:508 libs/applibs/eq.py:531
+msgid "ДА"
+msgstr "Cí"
+
+#: libs/baseclass/settings_screen.py:90 libs/baseclass/settings_screen.py:119
+#: libs/baseclass/kassa_screen.py:428
+msgid "OK"
+msgstr "OK"
+
+#: libs/kv/settings_screen.kv:21
+msgid "Импорт - Экспорт"
+msgstr "Importación y exportación"
+
+#: libs/kv/settings_screen.kv:29 libs/kv/asetting_screen.kv:40
+msgid "Настройки приложения"
+msgstr "Configuraciones de la aplicación"
+
+#: libs/kv/settings_screen.kv:38
+msgid "Настройка оборудования"
+msgstr "Configuración del equipo"
+
+#: libs/kv/settings_screen.kv:52
+msgid "Лицензия"
+msgstr "Licencia"
+
+#: libs/kv/settings_screen.kv:59
+msgid "О программе"
+msgstr "acerca de"
+
+#: libs/kv/impexp.kv:54 libs/kv/impexp_screen.kv:46
+msgid "импорт"
+msgstr "importar"
+
+#: libs/kv/impexp.kv:114 libs/kv/impexp.kv:126 libs/kv/impexp_screen.kv:90
+#: libs/kv/impexp_screen.kv:100
+msgid "поиск"
+msgstr "Buscar"
+
+#: libs/kv/root_screen.kv:30
+msgid "КАССА"
+msgstr "CAJA"
+
+#: libs/kv/root_screen.kv:37
+msgid "ДОСТАВКА"
+msgstr "ENTREGA"
+
+#: libs/kv/root_screen.kv:48
+msgid "РЕСТОРАН"
+msgstr "RESTAURANTE"
+
+#: libs/kv/root_screen.kv:57
+msgid "ОТЧЁТЫ"
+msgstr "INFORMES"
+
+#: libs/kv/root_screen.kv:66
+msgid "НАСТРОЙКИ"
+msgstr "AJUSTES"
+
+#: libs/kv/impexp_screen.kv:139
+msgid "отмена"
+msgstr "cancel"
+
+#: libs/kv/impexp_screen.kv:144
+msgid "загрузка"
+msgstr "cargando"
+
+#: libs/baseclass/kassa_screen.py:284
+msgid "Поиск товаров"
+msgstr "Búsqueda de Producto"
+
+#: libs/baseclass/kassa_screen.py:322
+msgid "ФР. ОТЧЁТЫ ПО СМЕНЕ"
+msgstr "INFORMES DE TURNO"
+
+#: libs/baseclass/kassa_screen.py:357 libs/baseclass/kassa_screen.py:405
+#: libs/baseclass/fr_widget.py:133
+msgid "Ошибка"
+msgstr "Error"
+
+#: libs/baseclass/kassa_screen.py:359 libs/baseclass/kassa_screen.py:407
+#: libs/baseclass/fr_widget.py:135
+msgid "ЗАКРЫТЬ"
+msgstr "CERRAR"
+
+#: libs/baseclass/kassa_screen.py:420
+msgid "Нет данных для сохранения. Чек пустой!"
+msgstr "No hay datos para guardar. ¡El cheque está vacío!"
+
+#: libs/baseclass/kassa_screen.py:423
+msgid "ЧЕК СОХРАНЁН !"
+msgstr "CHEQUE GUARDADO!"
+
+#: libs/baseclass/kassa_screen.py:439
+msgid "ВОССТАНОВИТЬ СОХРАНЁННЫЙ ЧЕК ?"
+msgstr "¿RESTAURAR UN CHEQUE GUARDADO?"
+
+#: libs/baseclass/kassa_screen.py:556 libs/kv/kassa_screen.kv:292
+msgid "общий дисконт"
+msgstr "descuento"
+
+#: libs/baseclass/kassa_screen.py:564
+msgid "УДАЛИТЬ ВСЕ ПОЗИЦИИ ЧЕКА ?"
+msgstr "¿BORRAR TODAS LAS POSICIONES DE VERIFICACIÓN?"
+
+#: libs/baseclass/kassa_screen.py:633
+msgid "ИЗМЕНЕНИЕ ПОЗИЦИИ"
+msgstr "CAMBIO DE POSICION"
+
+#: libs/baseclass/kassa_screen.py:699
+msgid "Поиск"
+msgstr "Buscar"
+
+#: libs/kv/kassa_screen.kv:145
+msgid "товар"
+msgstr "producto"
+
+#: libs/kv/kassa_screen.kv:156
+msgid "кол"
+msgstr "num"
+
+#: libs/kv/kassa_screen.kv:165
+msgid "цена"
+msgstr "precio"
+
+#: libs/kv/kassa_screen.kv:174
+msgid "сумма"
+msgstr "suma"
+
+#: libs/kv/kassa_screen.kv:259
+msgid "позиций        "
+msgstr "posiciones"
+
+#: libs/kv/kassa_screen.kv:277
+msgid "дисконт клиента"
+msgstr "desc. para clientes"
+
+#: libs/kv/kassa_screen.kv:309
+msgid "итого"
+msgstr "total"
+
+#: libs/kv/kassa_screen.kv:324
+msgid "скидка клиента"
+msgstr "desc. clientes "
+
+#: libs/kv/kassa_screen.kv:339
+msgid "скидка общая"
+msgstr "descuento general"
+
+#: libs/kv/kassa_screen.kv:513
+msgid "ФР"
+msgstr "FR"
+
+#: libs/kv/kassa_screen.kv:543
+msgid "клиент"
+msgstr "cliente"
+
+#: libs/kv/kassa_screen.kv:573
+msgid "прим"
+msgstr "nota"
+
+#: libs/kv/kassa_screen.kv:604
+msgid "сохр."
+msgstr "salv"
+
+#: libs/kv/kassa_screen.kv:634
+msgid "загрузить"
+msgstr "descargar"
+
+#: libs/kv/kassa_screen.kv:664
+msgid "возврат"
+msgstr "regreso"
+
+#: libs/kv/kassa_screen.kv:687
+msgid "УДАЛИТЬ ЧЕК"
+msgstr "BORRAR RECIBO "
+
+#: libs/kv/kassa_screen.kv:701
+msgid "ОПЛАТА"
+msgstr "PAGO"
+
+#: libs/kv/kassa_screen.kv:761
+msgid "введите название"
+msgstr "Ingrese el título"
+
+#: libs/baseclass/asetting_screen.py:41 libs/kv/asetting_screen.kv:63
+msgid "Название организации"
+msgstr "El nombre de la compañía "
+
+#: libs/baseclass/asetting_screen.py:84 libs/kv/asetting_screen.kv:81
+msgid "Адрес организации"
+msgstr "Dirección de la empresa"
+
+#: libs/baseclass/asetting_screen.py:126 libs/kv/asetting_screen.kv:99
+msgid "ИНН"
+msgstr "NIF"
+
+#: libs/baseclass/asetting_screen.py:181 libs/kv/asetting_screen.kv:117
+#: libs/baseclass/eqsetting_screen.py:123
+msgid "Выбор валюты"
+msgstr "Selección de moneda"
+
+#: libs/baseclass/asetting_screen.py:229 libs/baseclass/eqsetting_screen.py:170
+msgid "Выбор округления"
+msgstr "Selección de redondeo"
+
+#: libs/kv/asetting_screen.kv:134
+msgid "Округление"
+msgstr "Redondeo"
+
+#: libs/kv/asetting_screen.kv:152
+msgid "Общая скидка"
+msgstr "Descuento general"
+
+#: libs/baseclass/fr_widget.py:168
+msgid "Номер Z отчёта"
+msgstr "Z-Informe"
+
+#: libs/baseclass/fr_widget.py:174
+msgid "Сумма наличных"
+msgstr "Monto en efectivo"
+
+#: libs/baseclass/fr_widget.py:180
+msgid "Сумма внесения"
+msgstr "Cantidad del depósito"
+
+#: libs/baseclass/fr_widget.py:186
+msgid "Сумма выплаты"
+msgstr "Cantidad a pagar"
+
+#: libs/baseclass/fr_widget.py:192 libs/baseclass/fr_widget.py:198
+#: libs/baseclass/fr_widget.py:204 libs/baseclass/fr_widget.py:210
+msgid "0"
+msgstr "0"
+
+#: libs/baseclass/fr_widget.py:318
+msgid "Z-ОТЧЁТ"
+msgstr "Z-INFORME"
+
+#: libs/baseclass/fr_widget.py:327
+msgid "X-ОТЧЁТ"
+msgstr "X-INFORME"
+
+#: libs/baseclass/fr_widget.py:336
+msgid "В ЯЩИКЕ"
+msgstr "€ EN EL CUADRO"
+
+#: libs/baseclass/fr_widget.py:345
+msgid "ВНЕСЕНИЕ"
+msgstr "INTRODUCCIÓN"
+
+#: libs/baseclass/fr_widget.py:354
+msgid "ВЫПЛАТА"
+msgstr "PAGO"
+
+#: libs/baseclass/buttonlib.py:104
+msgid "Внесение количества, удаление позиции"
+msgstr "Ingresando cantidad, eliminando un artículo"
+
+#: libs/baseclass/buttonlib.py:512
+msgid "ИЗМЕНИТЬ"
+msgstr "CAMBIO"
+
+#: libs/kv/eqsetting_screen.kv:40
+msgid "Настройки оборудования"
+msgstr "Configuraciones de hardware"
+
+#: libs/kv/eqsetting_screen.kv:63
+msgid "Кассовый аппарат "
+msgstr "Cajero automático"
+
+#: libs/kv/eqsetting_screen.kv:70
+msgid "Принтер счетов"
+msgstr "Impresora de facturas "
+
+#: libs/kv/eqsetting_screen.kv:88
+msgid "VFD дисплей"
+msgstr "Pantalla VFD"
+
+#: libs/kv/eqsetting_screen.kv:105
+msgid "Сканер штрихкодов"
+msgstr "Escáner de código de barras"
+
+#: libs/kv/eqsetting_screen.kv:123
+msgid "Принтер штрихкодов"
+msgstr "Impresora de códigos de barras"
+
+#: libs/applibs/eq.py:44
+msgid "Чековый COM (TTY) принтер поддерживающий команды ESC/POS"
+msgstr "Impresora de recibos COM (TTY) que admite comandos ESC/POS"
+
+#: libs/applibs/eq.py:46
+msgid "Кассовый аппарат Титан-А, Титан-Плюс"
+msgstr "Caja registradora Titan-A, Titan-Plus"
+
+#: libs/applibs/eq.py:48
+msgid "наличные, карта 1, карта 2, банкет, депозит"
+msgstr "efectivo, tarjeta 1, tarjeta 2, banquete, depósito"
+
+#: libs/applibs/eq.py:210
+msgid "тип КСА"
+msgstr "tipo de caja registradora"
+
+#: libs/applibs/eq.py:220
+msgid "виды оплат"
+msgstr "tipos de pagos"
+
+#: libs/applibs/eq.py:229
+msgid "нижний колонтитул"
+msgstr "pie de página"
+
+#: libs/applibs/eq.py:240
+msgid "дополнительные свойства (дв.клик)"
+msgstr "propiedades adicionales (doble clic)"
+
+#: libs/applibs/eq.py:272
+msgid "Футер чека"
+msgstr "pie de página"
+
+#: libs/applibs/eq.py:289
+msgid "COM порт"
+msgstr "COM Puerto"
+
+#: libs/applibs/eq.py:298
+msgid "скорость порта"
+msgstr "velocidad del puerto"
+
+#: libs/applibs/eq.py:308
+msgid "кодовая страница"
+msgstr "página de código"
+
+#: libs/applibs/eq.py:321
+msgid "ТЕСТ"
+msgstr "PRUEBA"
+
+#: libs/applibs/eq.py:336
+msgid "IP"
+msgstr "IP"
+
+#: libs/applibs/eq.py:347
+msgid "IP адрес"
+msgstr "IP dirección"
+
+#: libs/applibs/eq.py:411
+msgid "Выбор порта"
+msgstr "Selección de puerto"
+
+#: libs/applibs/eq.py:439
+msgid "Выбор типа оплат"
+msgstr "Elección del tipo de pago"
+
+#: libs/applibs/eq.py:462
+msgid "Кодовая страница"
+msgstr "Página de código"
+
+#: libs/applibs/eq.py:482
+msgid "Скорость COM порта"
+msgstr "Velocidad del puerto COM"
+
+#: libs/applibs/eq.py:502
+msgid "Ширина ленты"
+msgstr "Ancho del cinturón"
+
+#: libs/applibs/eq.py:525
+msgid "Выбор модели кассы, ФР, принтера"
+msgstr "Selección de modelo de caja"
+
+#~ msgid "ПОИСК"
+#~ msgstr "BUSCAR"
+
+#~ msgid "Фискальные регистраторы"
+#~ msgstr "Registradores fiscales"
+
+#~ msgid "Чекопечатающее устройство: ФР, КСА, принтер "
+#~ msgstr "Compruebe el dispositivo de impresión: FR, KSA, impresora"
+
+#~ msgid "LICENSE"
+#~ msgstr "LICENCIA"
+
+#~ msgid "Press Back to Exit"
+#~ msgstr "Presione Atrás para salir "
+
+#~ msgid "Меню:"
+#~ msgstr "Menu:"
+
+#~ msgid "Импорт-экспорт"
+#~ msgstr "Imp-exp"
+
+#~ msgid "Настройки"
+#~ msgstr "Ajustes"
+
+#~ msgid "Язык"
+#~ msgstr "Complementos"
+
+#~ msgid ""
+#~ "     Товар                                 Кол-во         Цена        "
+#~ "Сумма"
+#~ msgstr ""
+#~ "     Artículo                              Cantidad      Precio      "
+#~ "Cantidad "
+
+#~ msgid "позиций"
+#~ msgstr "posiciones"
+
+#~ msgid "печать"
+#~ msgstr "sello"
+
+#~ msgid "достав"
+#~ msgstr "sacando"
+
+#~ msgid "УД"
+#~ msgstr "EL."
+
+#~ msgid "СЧЁТ"
+#~ msgstr "FACT"
+
+#~ msgid "ЧЕК"
+#~ msgstr "BILL/"
+
+#~ msgid "Замените этот экран на свой"
+#~ msgstr "Reemplace esta pantalla con la suya"
+
+#~ msgid "Нажмите еще раз для выхода"
+#~ msgstr "Press Back to exit"
+
+#~ msgid "Плагины"
+#~ msgstr "Plugins"
+
+#~ msgid "Да"
+#~ msgstr "Yes"
+
+#~ msgid "Нет информации о плагине!"
+#~ msgstr "There is no information about the plugin!"
+
+#~ msgid "Нет установленных плагинов!"
+#~ msgstr "No installed plugins!"

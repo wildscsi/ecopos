@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+
+<RallySettingsScreen>:
+    canvas:
+        Color:
+            rgba: app.bcolor3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScrollView:
+
+        MDList:
+            id: setting_list
+
+            OneLineIconListItem:
+                text: app.translation._('Импорт - Экспорт')
+                font_style: "H7"
+                on_release:
+                    root.parent.current = "IMPEXP"
+                IconLeftWidget:
+                    icon: "database-import-outline"
+
+            OneLineIconListItem:
+                text: app.translation._("Настройки приложения")
+                font_style: "H7"
+                on_release: root.parent.current = "ASETTING"
+                IconLeftWidget:
+                    icon: "cog"
+
+
+            OneLineIconListItem:
+                id: eqsetting
+                text: app.translation._("Настройка оборудования")
+                font_style: "H7"
+                on_release: root.parent.current = "EQSETTING"
+                IconLeftWidget:
+                    icon: "printer"
+
+            OneLineIconListItem:
+                text: app.translation._("Выбор языка")
+                font_style: "H7"
+                on_release: root.show_lang_dialog()
+                IconLeftWidget:
+                    icon: "web"
+
+            OneLineIconListItem:
+                text: app.translation._("Лицензия")
+                font_style: "H7"
+                on_release: root.show_licence_dialog()
+                IconLeftWidget:
+                    icon: "copyright"
+
+            OneLineIconListItem:
+                text: app.translation._("О программе")
+                font_style: "H7"
+                on_release: root.show_about_dialog()
+                IconLeftWidget:
+                    icon: "information-outline"
+
+# иконка выбора языка
+<ItemConfirm>
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
+
+

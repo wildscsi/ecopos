@@ -1,0 +1,154 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2020 CPV.BY
+#
+# For suggestions and questions:
+# <7664330@gmail.com>
+#
+# LICENSE: Commercial
+
+#: import _MDRaisedButton libs.baseclass.buttonlib._MDRaisedButton
+
+<ImpexpScreen>:
+    canvas:
+        Color:
+            rgba: app.bcolor3
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    name: 'impexp'
+
+    # общий контейнер
+
+    BoxLayout:
+        orientation: 'horizontal'
+
+        # контейнер с группами и кнопками редактирования -----------------------------------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            #RelativeLayout:
+            size_hint: 0.3, 0.99
+            pos_hint: {"center_x": .65, "center_y": 0.49}
+
+            # шапка перечня блюд
+            RelativeLayout:
+                id: cntgruppash
+                size_hint: [1, 0.07]
+                pos_hint: {'center_x': 0.5, 'center_y': .9}
+                padding: 10
+
+                MDFlatButton:
+                    id: cmdimport
+                    size_hint: [0.4, 0.8]
+                    font_style: "Button"
+                    pos_hint: {'center_x': 0.25, 'center_y': .5}
+                    text: app.translation._('импорт')
+                    on_press:root.show_load()
+
+
+            # скрол c группами
+            ScrollView:
+                # общий контейнер
+                GridLayout:
+                    id: box_gruppa
+                    size_hint_y: None
+                    cols: 1
+                    rows: 2
+                    spacing: 8
+                    padding: 8
+                    height: self.minimum_height
+                    # фон
+                    canvas:
+                    #    Color:
+                    #        rgb: app.color_sgray
+                    #    Rectangle:
+                    #        pos: self.pos
+                    #        size: self.size
+
+
+        # контейнер гридом с товарами
+        # -----------------------------------------------------------------------------------------------------------
+        BoxLayout:
+            orientation: 'vertical'
+            #RelativeLayout:
+
+            size_hint: 0.7, 0.99
+            pos_hint: {"center_x": .65, "center_y": 0.49}
+
+
+            # шапка перечня блюд
+            RelativeLayout:
+
+                id: cnttovarsh
+                size_hint: [1, 0.07]
+                pos_hint: {'center_x': 0.5, 'center_y': .7}
+                padding: 0
+
+                MDTextField:
+                    id: esearch
+                    hint_text: app.translation._('поиск')
+                    size_hint_x: None
+                    pos_hint: {'center_x': 0.65, 'center_y': .5}
+
+                MDFlatButton:
+                    id: cmdimport
+                    size_hint: [0.08, 0.8]
+                    font_style: "Button"
+                    color: app.color_white
+                    pos_hint: {'center_x': 0.90, 'center_y': .5}
+                    text: app.translation._('поиск')
+                    on_press:root.search_tovar()
+
+
+            #скрол c товарами
+            ScrollView:
+                # общий контейнер
+                GridLayout:
+                    id: box_tovar
+                    size_hint_y: None
+                    cols: 1
+                    rows: 2
+                    spacing: 8
+                    padding: 8
+                    height: self.minimum_height
+                    # фон
+                    #canvas:
+                    #    Color:
+                    #        rgb: app.color_sgray
+                    #    Rectangle:
+                    #        pos: self.pos
+                    #        size: self.size
+
+
+
+<Loadesearchog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            path:'.'
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+
+            MDFlatButton:
+                text: app.translation._('отмена')
+                font_style: "Button"
+                on_release: root.cancel()
+
+            MDFlatButton:
+                text: app.translation._('загрузка')
+                font_style: "Button"
+                on_release: root.load(filechooser.path, filechooser.selection)
+
+<MsgPopup@Popup>:
+    auto_dismiss: False
+    MDButton:
+        text: 'Close me!'
+        on_release: root.dismiss()
+
+
