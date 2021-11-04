@@ -19,7 +19,7 @@ class tMenuImport:
         self.app = MDApp.get_running_app()
         super().__init__(**kwargs)
         # читаем настройки
-        self.cpath = '/temp/'     # директорий импорта
+        self.cpath = 'temp/'     # директорий импорта
         self.cpathfile = ''     # директорий при импорте из файлов
         self.cerr = ''          # ошибка
         self.kob = 0            # объект для которого импортируем меню
@@ -195,7 +195,7 @@ class tMenuImport:
             for item in self.listfile:
                 shutil.copyfile(self.cpathfile+'/'+ item, os.getcwd()+self.cpath+item)
         except:
-            self.cerr = 'Error copy filles to /temp dir'
+            self.cerr = 'Error copy filles to temp dir'
             return False
         return True
 
