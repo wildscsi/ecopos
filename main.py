@@ -2,7 +2,7 @@
 
 """
 
-ECOPOS
+ECOPOS - 2021
 =============
 HoReCa & Retail 2022
 
