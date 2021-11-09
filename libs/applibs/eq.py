@@ -42,9 +42,9 @@ class eq():
     def __init__(self, **kwargs):
         self.app = MDApp.get_running_app()
         comcheck = {'descr': self.app.translation._('Чековый COM (TTY) принтер поддерживающий команды ESC/POS'),'name':'ESC/POS PRINTER','options':{'file':'ticket file name','bits':'Bit length: 7,8','parity':'N, odd, even','stop':'stop bits: 0, 1','soft':'software-controlled','hard':'1-on,0-off','upper':'capital letters','tapewidth':'width of belts','tags':'1-on,0-off','scode':'start code','ecode':'end code'}}
-        titanksa = {}
-        titanksa.update({'descr': self.app.translation._('Кассовый аппарат Титан-А, Титан-Плюс'),'name':'KSA TITAN-A','options':{'file':'ticket file name','tapewidth':'width of belts'}})
-        self.listksa.update({'comcheck':comcheck,'titanksa':titanksa })
+        titana = {}
+        titana.update({'descr': self.app.translation._('Кассовый аппарат Титан-А, Титан-Плюс'),'name':'KSA TITAN-A','options':{'file':'ticket file name','tapewidth':'width of belts','cashier':'titan admin name', 'pwd':'titan admin passwoed', 'timeout':'titan timeout','delimiter':'delimiter', 'cnonce':'cnonce key'}})
+        self.listksa.update({'comcheck':comcheck,'titana':titana })
         self.lpayname = self.app.translation._('наличные, карта 1, карта 2, банкет, депозит')
         super().__init__(**kwargs)
 
@@ -86,8 +86,8 @@ class eq():
         try: self.app.config._sections['KSA']['tags']
         except: self.app.config.setdefault('KSA', 'tags', '1')
 
-        try: self.app.config._sections['KSA']['ip']
-        except: self.app.config.setdefault('KSA', 'ip', '192.168.8.2')
+        try: self.app.config._sections['KSA']['host']
+        except: self.app.config.setdefault('KSA', 'host', '192.168.8.2')
 
         try: self.app.config._sections['KSA']['footer']
         except: self.app.config.setdefault('KSA', 'footer', 'Thanks !')
@@ -113,6 +113,20 @@ class eq():
         try: self.app.config._sections['KSA']['payname']
         except: self.app.config.setdefault('KSA', 'payname', '["Cash","Card"]')
 
+        try: self.app.config._sections['KSA']['cashier']
+        except: self.app.config.setdefault('KSA', 'cashier', 'admin')
+
+        try: self.app.config._sections['KSA']['pwd']
+        except: self.app.config.setdefault('KSA', 'pwd', '555555')
+
+        try: self.app.config._sections['KSA']['timeout']
+        except: self.app.config.setdefault('KSA', 'timeout', '[1,5,90]')
+
+        try: self.app.config._sections['KSA']['delimiter']
+        except: self.app.config.setdefault('KSA', 'delimiter', '-')
+
+        try: self.app.config._sections['KSA']['cnonce']
+        except: self.app.config.setdefault('KSA', 'cnonce', '669bcf2a9b1c9deb')
 
         self.app.config.write()
         self.setting_update()
@@ -124,6 +138,7 @@ class eq():
     def setting_update(self):
         self.ofr.update({'model':self.app.config.get('KSA', 'model')})
         self.app.oeq.footer = self.app.config.get('KSA', 'footer')
+        config={}
         if self.app.config.get('KSA', 'model') == 'comcheck':
             # ESC/POS чековый принтер
             self.ofr.update({'file':self.app.config.get('KSA', 'file')})
@@ -134,24 +149,34 @@ class eq():
             self.ofr.update({'codepage':self.app.config.get('KSA', 'codepage')})
             self.ofr.update({'upper':int(self.app.config.get('KSA', 'upper'))})
             self.ofr.update({'tags':int(self.app.config.get('KSA', 'tags'))})
-
             self.ofr.update({'scode':eval(self.app.config.get('KSA', 'scode'))})
             self.ofr.update({'ecode':eval(self.app.config.get('KSA', 'ecode'))})
-            config={}
+
             if len(self.app.config.get('KSA', 'baud')) == 0:
                 baud = 115200
             else:
                 baud = int(self.app.config.get('KSA', 'baud'))
             config.update({'port':self.app.config.get('KSA', 'port'),'baud': baud ,'bits':int(self.app.config.get('KSA', 'bits')),'parity':self.app.config.get('KSA', 'parity'),'stop':int(self.app.config.get('KSA', 'stop')),'soft':int(self.app.config.get('KSA', 'soft')),'hard':int(self.app.config.get('KSA', 'hard'))})
-            self.ofr.update({'config':config})
-        elif self.app.config.get('KSA', 'model') == 'titanksa':
+
+        elif self.app.config.get('KSA', 'model') == 'titana':
             # КСА Титан-А
-            config={}
-            config.update({'ip':self.app.config.get('KSA', 'ip')})
-            self.ofr.update({'config':config})
+            # Касса Титан-А
+                # пример
+                #c1 = {'model':'titana','file':'ticket.txt','tapewidth':40,
+                #        'config':{'host':'192.168.8.2','cnonce':'669bcf2a9b1c9deb',
+                #                  'cashier':'admin','pwd':'555555','timeout':[1,5,90],'delimiter':'-'}}
+
+
+            self.ofr.update({'file':self.app.config.get('KSA', 'file')})
+            if len(self.app.config.get('KSA', 'tapewidth')) == 0:
+                self.ofr.update({'tapewidth':40})
+            else:
+                self.ofr.update({'tapewidth':int(self.app.config.get('KSA', 'tapewidth'))})
+            config.update({'host':self.app.config.get('KSA', 'host'),'cnonce':self.app.config.get('KSA', 'cnonce'), 'cashier':self.app.config.get('KSA', 'cashier') ,'pwd':self.app.config.get('KSA', 'pwd'),'timeout':self.app.config.get('KSA', 'timeout'),'delimiter':self.app.config.get('KSA', 'delimiter')})
 
         else: self.ofr = {}
-        #print(self.ofr)
+        self.ofr.update({'config':config})
+        print(self.ofr)
         return True
 
     # ------------------------------------- возвращаем перечень портов в системе --------------------------------------
@@ -190,7 +215,7 @@ class eq():
         if self.app.oeq.ofr['model'] == 'comcheck': self.addcontrols_comcheck()
 
         # форма отображения настроек Титан-А
-        elif self.app.oeq.ofr['model'] == 'titanksa': self.addcontrols_titanksa()
+        elif self.app.oeq.ofr['model'] == 'titana': self.addcontrols_titana()
 
 
 
@@ -329,7 +354,7 @@ class eq():
             #;  self.eqcnt.add_widget(cmdsave);  self.eqcnt.add_widget(cmdcancel)
 
      # --------------------------------------  добавление контролов КСА Титан ----------------------------------------
-    def addcontrols_titanksa(self):
+    def addcontrols_titana(self):
         # настройка IP адреса
         items = []
         self.eqcnt.dialogip = MDDialog(
@@ -348,7 +373,7 @@ class eq():
         lipcnt.add_widget(lip)
         eipcnt =  RelativeLayout(size_hint = [0.2, 0.15], pos_hint={'center_x': 0.4, 'center_y': .69})
         eipcnt.id = 'eipcnt'
-        eip = MDFlatButton(text=self.app.oeq.ofr['config']['ip'],font_style="H6", pos_hint={'center_x': 0.5, 'center_y': .5}, size_hint_y=None, on_release= self.eqcnt.dialogip.open)
+        eip = MDFlatButton(text=self.app.oeq.ofr['config']['host'],font_style="H6", pos_hint={'center_x': 0.5, 'center_y': .5}, size_hint_y=None, on_release= self.eqcnt.dialogip.open)
         eip.id = 'eip'
         eipcnt.add_widget(eip)
         self.eqcnt.add_widget(lipcnt); self.eqcnt.add_widget(eipcnt)

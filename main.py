@@ -149,10 +149,11 @@ class ecopos(MDApp):
             self.sodll = './soarm/data.so'
 
         #создание директория
-        try:
-            os.mkdir('temp')
-        except OSError:
-            print ("Error create dir TEMP")
+        if not os.path.isdir('temp'):
+            try:
+                os.mkdir('temp')
+            except OSError:
+                print ("Error create dir TEMP")
 
         self.osql = Oqsql()                 # объект SQL
         self.ocalc = Calc(self)             # объект расчёта сумм

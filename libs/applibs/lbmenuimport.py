@@ -54,7 +54,6 @@ class tMenuImport:
     def start(self):
         #установка настроек
         self.setvalue()
-        aaa = 123
         return  self.importrec()
 
     # проверки и импорт
@@ -85,7 +84,6 @@ class tMenuImport:
             if not self.fileimport(): return False
 
 
-        aa = 123
         ctxt = "SELECT " + "name FROM sqlite_master WHERE type='table' AND name='tovar';"
         if not self.app.osql.execute(ctxt): return False
         self.aftertovar = self.app.osql.getresult()
@@ -449,7 +447,6 @@ class tMenuImport:
             if len(lgruppa) == 0 and len(ltovar) == 0:
                 self.cerr = 'No Item in file GOODS.CSV. Import canceled'; return False
 
-            aa=123
             # полная перезапись меню
             # удаляем все записи меню
             if not self.app.osql.delete('gruppa','kob=' + str(self.app.kob)):
