@@ -224,7 +224,6 @@ class AsettingScreen(MDScreen):
             else:
                 items[i].ids.check.active = False
             i+=1
-        aa = 132
         self.dialogiround = MDDialog(
             title=self.app.translation._("Выбор округления"),
             type="confirmation",

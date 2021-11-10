@@ -39,6 +39,7 @@ class eq():
     lcodepage= {'1079':'spain win','1071':'germany','cp866':'russian DOS','1251':'russian win','1':'usa'}
     lpayname = ''       # типы оплат в зависимости от языка
     footer = ''
+    eipedit = ''
     def __init__(self, **kwargs):
         self.app = MDApp.get_running_app()
         comcheck = {'descr': self.app.translation._('Чековый COM (TTY) принтер поддерживающий команды ESC/POS'),'name':'ESC/POS PRINTER','options':{'file':'ticket file name','bits':'Bit length: 7,8','parity':'N, odd, even','stop':'stop bits: 0, 1','soft':'software-controlled','hard':'1-on,0-off','upper':'capital letters','tapewidth':'width of belts','tags':'1-on,0-off','scode':'start code','ecode':'end code'}}
@@ -286,15 +287,23 @@ class eq():
         self.eqcnt.add_widget(lfootercnt);self.eqcnt.add_widget(efootercnt)
         self.oButton.add_widget(self.eqcnt)
 
-
-
-
-
+    # редактирование IP
+    def editip(self, *args):
+        self.eipedit = TextInput(text=self.app.oeq.ofr['config']['host'], hint_text=self.app.translation._('Редактирование IP'),pos_hint = {"center_x": .40, "center_y": .69}, size_hint=(0.2,0.1))
+        self.eqcnt.add_widget(self.eipedit)
+        # добавляем клавиатуру в WIN и Linux
+        if platform.system() in ["Windows","Linux"]:
+            if self.oform.kbd == None:
+                self.oform.kbd = ekeyboard()
+                self.oform.kbd.bind(on_key_up = self._on_keyboard_up_ip)
+                self.oform.kbd.text = self.app.oeq.ofr['config']['host']
+                self.oform.kbd.lclose = False
+                self.oform.add_widget(self.oform.kbd)
 
 
     # редактирование футера
     def editfooter(self, *args):
-        self.efooteredit = TextInput(text=self.app.oeq.footer, hint_text=self.app.translation._('Футер чека'),pos_hint = {"center_x": .51, "center_y": .24}, size_hint=(0.55,0.17))
+        self.efooteredit = TextInput(text=self.app.oeq.footer, hint_text=self.app.translation._('Футер чека'),pos_hint = {"center_x": .51, "center_y": .27}, size_hint=(0.55,0.17))
         self.eqcnt.add_widget(self.efooteredit)
         # добавляем клавиатуру в WIN и Linux
         if platform.system() in ["Windows","Linux"]:
@@ -356,24 +365,13 @@ class eq():
      # --------------------------------------  добавление контролов КСА Титан ----------------------------------------
     def addcontrols_titana(self):
         # настройка IP адреса
-        items = []
-        self.eqcnt.dialogip = MDDialog(
-        title=self.app.translation._("IP"),
-        type="confirmation",
-        md_bg_color=self.app.bcolor3,
-        items = items,
-            buttons=[
-                MDFlatButton(text=self.app.translation._('ОТМЕНА'),font_style="Button",on_release=self.dialogip_close),
-                MDRaisedButton(text=self.app.translation._('ДА'),font_style="Button", on_release=self.save_port),
-                ],
-            )
         # IP адрес
         lipcnt =  RelativeLayout(size_hint = [0.2, 0.15], pos_hint={'center_x': 0.12, 'center_y': .69})
         lip = MDLabel(text=self.app.translation._('IP адрес'), color=self.app.color_gray, font_style='H7', halign='right', pos_hint={"center_x": .5, "center_y": .5}, size_hint_y=None)
         lipcnt.add_widget(lip)
         eipcnt =  RelativeLayout(size_hint = [0.2, 0.15], pos_hint={'center_x': 0.4, 'center_y': .69})
         eipcnt.id = 'eipcnt'
-        eip = MDFlatButton(text=self.app.oeq.ofr['config']['host'],font_style="H6", pos_hint={'center_x': 0.5, 'center_y': .5}, size_hint_y=None, on_release= self.eqcnt.dialogip.open)
+        eip = MDFlatButton(text=self.app.oeq.ofr['config']['host'],font_style="H6", pos_hint={'center_x': 0.5, 'center_y': .5}, size_hint_y=None, on_release= self.editip)
         eip.id = 'eip'
         eipcnt.add_widget(eip)
         self.eqcnt.add_widget(lipcnt); self.eqcnt.add_widget(eipcnt)
@@ -394,6 +392,28 @@ class eq():
                 try:
                     # поиск значения
                     if item.id == 'efootercnt':
+                        item.children[0].text =self.oform.kbd.text
+                except: pass
+            # пеергрузка контролов
+            self.setting_update()
+
+
+    # --------------------------------------  обработка нажатий кнопок IP  ---------------------------------------
+    def _on_keyboard_up_ip(self, keyboard, keycode, text, modifiers):
+        self.oform.kbd.updkeykode(keyboard, keycode, text, modifiers)
+        if self.oform.kbd.lclose:
+            self.oform.remove_widget(self.oform.kbd)
+            self.eqcnt.remove_widget(self.eipedit)
+            self.oform.kbd = None
+        else:
+            self.eipedit.text = self.oform.kbd.text
+            self.app.config.set('KSA', 'host', self.oform.kbd.text)
+            self.app.config.write()
+            # установка значения
+            for item in self.eqcnt.children:
+                try:
+                    # поиск значения
+                    if item.id == 'eipcnt':
                         item.children[0].text =self.oform.kbd.text
                 except: pass
             # пеергрузка контролов
